@@ -130,7 +130,7 @@ def posicion_inicial_del_jugador() -> tuple:
     return DIMENSIONES // 2, DIMENSIONES // 2
 
 
-def generar_mapa() -> list:
+def generar_mapa(DIMENSIONES:int) -> list:
     """Genera un mapa de la isla con pistas y trampas correctamente colocadas. Con el siguiente contenido:
         - "X" indica el tesoro, y es única en el mapa.
         - "!" indica una trampa, y puede haber varias.
@@ -149,13 +149,24 @@ def generar_mapa() -> list:
     mapa[tesoro_x][tesoro_y] = CELDA_TESORO
 
     # Colocar pistas y trampas
-    ???
+
+
+    for i in range(0,DIMENSIONES):
+
+        for j in range(0,DIMENSIONES):
+
             if mapa[i][j] != CELDA_TESORO:
+
                 # Decidir aleatoriamente si colocar una pista, una trampa o vacia.
-                opciones = [genera_pista((tesoro_x, tesoro_y), (i, j))]
-                opciones += [CELDA_TRAMPA]
-                opciones += [CELDA_VACIA]
-                mapa[i][j] = random.choice(opciones)
+
+                numAleatorio =  random.randint(0,2)
+                if numAleatorio == 0:
+                    opciones = [genera_pista((tesoro_x, tesoro_y), (i, j))]
+                elif numAleatorio == 1:
+                        opciones = [CELDA_TRAMPA]
+                elif numAleatorio == 2:
+                        opciones = [CELDA_VACIA]
+        mapa[i][j] = random.choice(opciones)
 
     return mapa
 
@@ -261,9 +272,9 @@ def procesar_movimiento(posicion: tuple, mapa: list) -> int:
 
 def simbolo_celda(celda):
     """Retorna el símbolo a pintar en la celda"""
-    if celda != CELDA_VACIA
+    if celda != CELDA_VACIA:
         return DESCONOCIDO
-    else
+    else:
         return CELDA_VACIA 
 
 
@@ -279,7 +290,7 @@ def imprimir_mapa(mapa: list):
     :param mapa: El mapa a imprimir.
     """
     for fila in mapa:
-        print fila
+        print(fila)
 
 
 def muestra_resultado_del_movimiento(resultado: int, nueva_posicion: tuple, mapa: list):
@@ -336,4 +347,9 @@ def jugar():
 
 
 if __name__ == "__main__":
-    jugar()
+
+    generar_mapa()
+
+    imprimir_mapa()
+
+    #   jugar()
