@@ -150,7 +150,6 @@ def generar_mapa(DIMENSIONES:int) -> list:
 
     # Colocar pistas y trampas
 
-
     for i in range(0,DIMENSIONES):
 
         for j in range(0,DIMENSIONES):
@@ -159,19 +158,20 @@ def generar_mapa(DIMENSIONES:int) -> list:
 
                 # Decidir aleatoriamente si colocar una pista, una trampa o vacia.
 
-                numAleatorio =  random.randint(0,2)
+                numAleatorio = random.randint(0, 2)
                 if numAleatorio == 0:
                     opciones = [genera_pista((tesoro_x, tesoro_y), (i, j))]
                 elif numAleatorio == 1:
-                        opciones = [CELDA_TRAMPA]
+                    opciones = [CELDA_TRAMPA]
                 elif numAleatorio == 2:
-                        opciones = [CELDA_VACIA]
-        mapa[i][j] = random.choice(opciones)
+                    opciones = [CELDA_VACIA]
+
+                mapa[i][j] = random.choice(opciones)
 
     return mapa
 
 
-def genera_pista():
+def genera_pista(posicion_tesoro: tuple,posicion: tuple):
     """
     Genera una pista para el mapa, en función de donde se encuentre el tesoro.
     Decidirá si la pista es sobre la fila o la columna basada en la aleatoriedad. Ademas tiene en cuenta que
@@ -348,8 +348,8 @@ def jugar():
 
 if __name__ == "__main__":
 
-    generar_mapa()
+    mapa = generar_mapa(DIMENSIONES)
 
-    imprimir_mapa()
+    imprimir_mapa(mapa)
 
     #   jugar()
