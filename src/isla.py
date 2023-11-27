@@ -284,8 +284,14 @@ def simbolo_celda(celda):
 
 def imprimir_mapa_oculto(mapa: list):
     """Imprime el mapa sin revelar el tesoro ni las trampas."""
+
+
+    numFila = 1
     for fila in mapa:
-            print(" ".join([simbolo_celda(celda) for celda in fila]))
+
+        print(" ".join([simbolo_celda(celda) for celda in fila]),numFila)
+        numFila += 1
+
 
 
 
@@ -322,7 +328,7 @@ def muestra_estado_mapa(mapa, posicion_jugador):
     """Muestra el mapa y la posición del jugador."""
 
     imprimir_mapa_oculto(mapa)
-    print(f"Tu posición es {posicion_jugador}")
+    print(f"Tu posición es {posicion_jugador[0]+1,posicion_jugador[1]+1}")
 
 
 def jugar():
@@ -336,7 +342,6 @@ def jugar():
     resultado_movimiento = None
     # Loop principal del juego. El juego termina cuando el jugador realizar movimiento SALIR.
     while not movimiento == SALIR and resultado_movimiento != TESORO_ENCONTRADO:
-        print("caca")
         # Obtener la nueva posición del jugador y procesar el movimiento
         nueva_posicion = obtener_nueva_posicion(posicion_jugador,movimiento)
         resultado_movimiento = procesar_movimiento(nueva_posicion, mapa)
@@ -355,7 +360,3 @@ def jugar():
 if __name__ == "__main__":
     jugar()
 
-"""    mapa = generar_mapa(DIMENSIONES)
-
-    imprimir_mapa(mapa)
-"""
